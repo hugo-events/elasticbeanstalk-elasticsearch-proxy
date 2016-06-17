@@ -1,6 +1,10 @@
 Beanstalk deployment configuration for nginx as a proxy server for Amazon Elastic Search Service
 ------------------------------------------------------------------------------------------------
 
+As of June 2016, AWS Elastic Search Service doesn't support VPC, so to protect the ES instance, you have to use either
+proxy, or request signing with SDK. Request signing might be an issue because of legacy code.
+So this repository helps to set up a proxy in a couple of minutes with elasticbeanstalk.
+
 Deployment
 ----------
 
@@ -21,20 +25,22 @@ It's as easy as:
 
 You will need to create and configure elastic beanstalk environment prior to the deployment command.
 
-
 Configuration
 -------------
 
 You will need to set up such environment variables for your elastic beanstalk environment:
 
 * STAGING_SERVICE
-    your staging elastic search endpoint
+    your staging elastic search endpoint, in form of ``endpoint.domain:443``
 * PRODUCTION_SERVICE
-    your staging elastic search endpoint
+    your staging elastic search endpoint, in form of ``endpoint.domain:443``
 * STAGING_NGINX_SERVER_NAME
-    space separated list of accepted server names to restrict your staging application to
+    space separated list of accepted server names to restrict your staging application to, in form of ``endpoint.domain``
 * PRODUCTION_NGINX_SERVER_NAME
-    space separated list of accepted server names to restrict your staging application to
+    space separated list of accepted server names to restrict your staging application to, in form of ``endpoint.domain:443``
+
+After setting up the variables and deploying the change, you'll need to set up a security group for the running instance,
+which will protect it properly.
 
 License
 -------

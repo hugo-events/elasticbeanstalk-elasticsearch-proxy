@@ -8,4 +8,4 @@ deploy:
 
 # run local instance
 local-run:
-	eb local run --profile=$(AWS_PROFILE) --envvars SERVICE_URL=google.com,NGINX_SERVER_NAME=localhost
+	eb local run --profile=$(AWS_PROFILE) --envvars PRODUCTION_SERVICE_URL=google.com,STAGING_SERVICE_URL=google.com,STAGING_NGINX_SERVER_NAME=localhost,PRODUCTION_NGINX_SERVER_NAME=localhost
