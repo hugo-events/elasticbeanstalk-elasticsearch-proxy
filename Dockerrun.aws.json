@@ -21,13 +21,6 @@
           "containerPort": 80
         }
       ],
-    "logConfiguration": {
-        "logDriver": "awslogs",
-        "options": {
-            "awslogs-group": "elasticbeanstalk-elasticsearch-proxy",
-            "awslogs-region": "eu-west-1"
-        }
-      },
       "mountPoints": [
         {
           "sourceVolume": "nginx-conf",
