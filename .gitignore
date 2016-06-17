@@ -4,3 +4,4 @@
 !.elasticbeanstalk/*.cfg.yml
 !.elasticbeanstalk/*.global.yml
 htpasswd
+deployment/etc/nginx/conf.d/default.conf
