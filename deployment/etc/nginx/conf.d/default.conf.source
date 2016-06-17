@@ -1,21 +1,50 @@
-upstream service {
-    server ${SERVICE_URL};
+upstream staging_service {
+    server ${STAGING_SERVICE};
+}
+
+upstream production_service {
+    server ${PRODUCTION_SERVICE};
 }
 
 server {
-    listen       80 default_server;
-    server_name  ${NGINX_SERVER_NAME};
+    listen  80 default_server;
+    return 200;
+}
+
+
+server {
+    listen       80;
+    server_name  ${STAGING_NGINX_SERVER_NAME};
     client_max_body_size 100M;
 
     # proxy the upstream
     #
     location / {
-        proxy_pass http://service;
+        proxy_pass https://staging_service;
         proxy_read_timeout 600s;
         proxy_set_header   Host                 $host;
         proxy_set_header   X-Real-IP            $remote_addr;
         proxy_set_header   X-Forwarded-For      $proxy_add_x_forwarded_for;
         proxy_set_header   X-Forwarded-Proto    $http_x_forwarded_proto;
-        proxy_set_header X-outside-url          $scheme://$host:$server_port;
+        proxy_set_header   X-outside-url        $scheme://$host:$server_port;
+    }
+}
+
+
+server {
+    listen       80;
+    server_name  ${PRODUCTION_NGINX_SERVER_NAME};
+    client_max_body_size 100M;
+
+    # proxy the upstream
+    #
+    location / {
+        proxy_pass https://production_service;
+        proxy_read_timeout 600s;
+        proxy_set_header   Host                 $host;
+        proxy_set_header   X-Real-IP            $remote_addr;
+        proxy_set_header   X-Forwarded-For      $proxy_add_x_forwarded_for;
+        proxy_set_header   X-Forwarded-Proto    $http_x_forwarded_proto;
+        proxy_set_header   X-outside-url        $scheme://$host:$server_port;
     }
 }

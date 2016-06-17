@@ -27,10 +27,14 @@ Configuration
 
 You will need to set up such environment variables for your elastic beanstalk environment:
 
-* SERVICE_URL
-    your elastic search endpoint
-* NGINX_SERVER_NAME
-    space separated list of accepted server names to restrict your application to
+* STAGING_SERVICE
+    your staging elastic search endpoint
+* PRODUCTION_SERVICE
+    your staging elastic search endpoint
+* STAGING_NGINX_SERVER_NAME
+    space separated list of accepted server names to restrict your staging application to
+* PRODUCTION_NGINX_SERVER_NAME
+    space separated list of accepted server names to restrict your staging application to
 
 License
 -------

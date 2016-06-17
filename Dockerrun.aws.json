@@ -14,7 +14,7 @@
       "image": "nginx",
       "essential": true,
       "memory": 128,
-      "command": ["/bin/bash", "-c", "envsubst '${SERVICE_URL}${NGINX_SERVER_NAME}' < /etc/nginx/conf.d/default.conf.source > /etc/nginx/conf.d/default.conf && nginx -g 'daemon off;'"],
+      "command": ["/bin/bash", "-c", "envsubst '${STAGING_SERVICE}${STAGING_NGINX_SERVER_NAME}${PRODUCTION_SERVICE}${PRODUCTION_NGINX_SERVER_NAME}' < /etc/nginx/conf.d/default.conf.source > /etc/nginx/conf.d/default.conf && nginx -g 'daemon off;'"],
       "portMappings": [
         {
           "hostPort": 80,
