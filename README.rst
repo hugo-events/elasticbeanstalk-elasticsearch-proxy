@@ -8,6 +8,9 @@ So this repository helps to set up a proxy in a couple of minutes with elasticbe
 Deployment
 ----------
 
+You need to set up a security group named `elasticsearch-proxy-consumer` which doesn't need to have any rules, but will
+be a marker for instances which need access to the elasticsearch proxy (whithin the same VPC).
+
 You will need to install and configure elastic beanstalk `CLI <http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/eb-cli3-install.html>`_
 
 
@@ -39,8 +42,8 @@ You will need to set up such environment variables for your elastic beanstalk en
 * PRODUCTION_NGINX_SERVER_NAME
     space separated list of accepted server names to restrict your staging application to, in form of ``endpoint.domain:443``
 
-After setting up the variables and deploying the change, you'll need to set up a security group for the running instance,
-which will protect it properly.
+After setting up the variables and deploying the change, make sure you've assigned `elasticsearch-proxy-consumer`
+security group to instances needing the access to elastic search proxy.
 
 License
 -------
