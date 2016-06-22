@@ -33,14 +33,18 @@ Configuration
 
 You will need to set up such environment variables for your elastic beanstalk environment:
 
+* DEVELOPMENT_SERVICE
+    your development elastic search endpoint, in form of ``endpoint.domain:443``
 * STAGING_SERVICE
     your staging elastic search endpoint, in form of ``endpoint.domain:443``
 * PRODUCTION_SERVICE
     your staging elastic search endpoint, in form of ``endpoint.domain:443``
+* DEVELOPMENT_NGINX_SERVER_NAME
+    space separated list of accepted server names to restrict your development application to, in form of ``endpoint.domain``
 * STAGING_NGINX_SERVER_NAME
     space separated list of accepted server names to restrict your staging application to, in form of ``endpoint.domain``
 * PRODUCTION_NGINX_SERVER_NAME
-    space separated list of accepted server names to restrict your staging application to, in form of ``endpoint.domain:443``
+    space separated list of accepted server names to restrict your staging application to, in form of ``endpoint.domain``
 
 After setting up the variables and deploying the change, make sure you've assigned `elasticsearch-proxy-consumer`
 security group to instances needing the access to elastic search proxy.
