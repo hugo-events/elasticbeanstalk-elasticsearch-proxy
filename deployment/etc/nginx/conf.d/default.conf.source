@@ -1,15 +1,3 @@
-upstream development_service {
-    server ${DEVELOPMENT_SERVICE};
-}
-
-upstream staging_service {
-    server ${STAGING_SERVICE};
-}
-
-upstream production_service {
-    server ${PRODUCTION_SERVICE};
-}
-
 server {
     listen  80 default_server;
     return 200;
@@ -24,7 +12,8 @@ server {
     # proxy the upstream
     #
     location / {
-        proxy_pass https://development_service;
+        set $backend "https://${DEVELOPMENT_SERVICE}";
+        proxy_pass $backend;
         proxy_read_timeout 600s;
         proxy_set_header   Host                 $host;
         proxy_set_header   X-Real-IP            $remote_addr;
@@ -43,7 +32,8 @@ server {
     # proxy the upstream
     #
     location / {
-        proxy_pass https://staging_service;
+        set $backend "https://${STAGING_SERVICE}";
+        proxy_pass $backend;
         proxy_read_timeout 600s;
         proxy_set_header   Host                 $host;
         proxy_set_header   X-Real-IP            $remote_addr;
@@ -62,7 +52,8 @@ server {
     # proxy the upstream
     #
     location / {
-        proxy_pass https://production_service;
+        set $backend "https://${PRODUCTION_SERVICE}";
+        proxy_pass $backend;
         proxy_read_timeout 600s;
         proxy_set_header   Host                 $host;
         proxy_set_header   X-Real-IP            $remote_addr;
