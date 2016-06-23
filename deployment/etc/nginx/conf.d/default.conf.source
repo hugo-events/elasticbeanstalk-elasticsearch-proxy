@@ -11,6 +11,7 @@ server {
 
     # proxy the upstream
     #
+    resolver 8.8.8.8;
     location / {
         set $backend "https://${DEVELOPMENT_SERVICE}";
         proxy_pass $backend;
@@ -31,6 +32,7 @@ server {
 
     # proxy the upstream
     #
+    resolver 8.8.8.8;
     location / {
         set $backend "https://${STAGING_SERVICE}";
         proxy_pass $backend;
@@ -51,6 +53,7 @@ server {
 
     # proxy the upstream
     #
+    resolver 8.8.8.8;
     location / {
         set $backend "https://${PRODUCTION_SERVICE}";
         proxy_pass $backend;
